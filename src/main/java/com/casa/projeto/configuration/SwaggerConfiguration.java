@@ -13,20 +13,23 @@ import springfox.documentation.service.Contact;
 import springfox.documentation.service.VendorExtension;
 import springfox.documentation.spi.DocumentationType;
 import springfox.documentation.spring.web.plugins.Docket;
-import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 @Configuration
-@EnableSwagger2
 @EnableWebMvc
 public class SwaggerConfiguration {
+	
+	/**
+	 *  http://localhost:8082/Escolinha/swagger-ui/index.html
+	 * @return retorna a aplicação no site do swagger
+	 */
 
 	@Bean
 	public Docket projetoAdd() {
-		return new Docket(DocumentationType.SWAGGER_2).select()
-				.apis(RequestHandlerSelectors.basePackage("com.casa.projeto"))
-				.paths(PathSelectors.regex("/Escolinha/Alunos.*")).build().apiInfo(metaInfo());
+		return new Docket(DocumentationType.SWAGGER_2).select().apis(RequestHandlerSelectors.any())
+				.paths(PathSelectors.any()).build().apiInfo(metaInfo());
 	}
 
+	@SuppressWarnings("rawtypes")
 	private ApiInfo metaInfo() {
 		ApiInfo apiInfo = new ApiInfo("Desafio.Add", "API REST de cadastro de alunos.", "1.0", "Termos de Serviço",
 				new Contact("Joelson Luiz Conceição Cerqueira", "joelsonluiz2010@gmail.com",
@@ -36,4 +39,5 @@ public class SwaggerConfiguration {
 
 		return apiInfo;
 	}
+
 }
